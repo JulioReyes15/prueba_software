@@ -16,5 +16,4 @@ class Marca extends Model
         'marca',
     ];
 
-
 }
