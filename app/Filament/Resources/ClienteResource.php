@@ -12,6 +12,10 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
+
+
 
 class ClienteResource extends Resource
 {
@@ -23,7 +27,24 @@ class ClienteResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('nombre')
+                    ->label('Nombre')
+                    ->required()
+                    ->maxLength(100),
+
+                TextInput::make('apellido')
+                    ->label('Apellido')
+                    ->required()
+                    ->maxLength(100),
+
+                TextInput::make('telefono')
+                    ->label('Teléfono')
+                    ->maxLength(20),
+
+                TextInput::make('email')
+                    ->label('Email')
+                    ->email()
+                    ->maxLength(200),
             ]);
     }
 
@@ -31,7 +52,24 @@ class ClienteResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('id_cliente')
+                    ->label('ID')
+                    ->sortable(),
+
+                TextColumn::make('nombre')
+                    ->label('Nombre')
+                    ->searchable(),
+
+                TextColumn::make('apellido')
+                    ->label('Apellido')
+                    ->searchable(),
+
+                TextColumn::make('telefono')
+                    ->label('Teléfono'),
+
+                TextColumn::make('email')
+                    ->label('Email'),
+
             ])
             ->filters([
                 //
