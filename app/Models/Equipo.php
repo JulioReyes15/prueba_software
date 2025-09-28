@@ -19,4 +19,13 @@ class Equipo extends Model
         'modelo',
     ];
 
+      public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marca::class, 'id_marca');
+    }
 }

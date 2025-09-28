@@ -12,7 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
 class MarcaResource extends Resource
 {
     protected static ?string $model = Marca::class;
@@ -23,7 +24,11 @@ class MarcaResource extends Resource
     {
         return $form
             ->schema([
-                //
+                     Forms\Components\TextInput::make('marca')
+                    ->required()
+                    ->maxLength(200)
+                    ->unique(ignoreRecord: true),
+
             ]);
     }
 
@@ -31,13 +36,26 @@ class MarcaResource extends Resource
     {
         return $table
             ->columns([
-                //
+                 Tables\Columns\TextColumn::make('marca')->searchable(),
+                Tables\Columns\TextColumn::make('created_at')->date(),
+            ])
+            ->filters([])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

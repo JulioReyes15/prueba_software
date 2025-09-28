@@ -12,6 +12,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
 
 class EquipoResource extends Resource
 {
@@ -23,7 +25,21 @@ class EquipoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\Select::make('id_cliente')
+                    ->relationship('cliente', 'nombre')
+                    ->required(),
+
+                Forms\Components\Select::make('id_marca')
+                    ->relationship('marca', 'marca')
+                    ->required(),
+
+                Forms\Components\TextInput::make('tipo_equipo')
+                    ->required()
+                    ->maxLength(100),
+
+                Forms\Components\TextInput::make('modelo')
+                    ->required()
+                    ->maxLength(100),
             ]);
     }
 
@@ -31,13 +47,29 @@ class EquipoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('cliente.nombre')->label('Cliente'),
+                Tables\Columns\TextColumn::make('marca.marca')->label('Marca'),
+                Tables\Columns\TextColumn::make('tipo_equipo'),
+                Tables\Columns\TextColumn::make('modelo'),
+                Tables\Columns\TextColumn::make('created_at')->date(),
+            ])
+            ->filters([])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
