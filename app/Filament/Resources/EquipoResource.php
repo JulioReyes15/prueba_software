@@ -51,12 +51,13 @@ class EquipoResource extends Resource
                 Tables\Columns\TextColumn::make('marca.marca')->label('Marca'),
                 Tables\Columns\TextColumn::make('tipo_equipo'),
                 Tables\Columns\TextColumn::make('modelo'),
-                Tables\Columns\TextColumn::make('created_at')->date(),
             ])
             ->filters([])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -69,6 +70,8 @@ class EquipoResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
+
 
             ])
             ->bulkActions([

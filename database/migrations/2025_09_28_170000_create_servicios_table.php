@@ -12,17 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('servicios', function (Blueprint $table) {
-            $table->id('id_servicio');
+            
             $table->unsignedBigInteger('id_equipo');
             $table->foreign('id_equipo')
                 ->references('id_equipo')
                 ->on('equipos')
                 ->onDelete('cascade');
+
             $table->unsignedBigInteger('id_tecnico');
             $table->foreign('id_tecnico')
                 ->references('id_tecnico')
                 ->on('tecnicos')
                 ->onDelete('cascade');
+
             $table->date('fecha_recepcion');
             $table->text('problema_reportado');
             $table->enum('estado',

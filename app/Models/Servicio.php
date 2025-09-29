@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,6 +24,17 @@ class Servicio extends Model
         'fecha_entrega',
     ];
 
+
+          public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id_cliente', 'id_cliente');
+    }
+
+      public function marca()
+    {
+        return $this->belongsTo(marca::class, 'id_marca', 'id_marca');
+    }
+    
     public function equipo()
     {
         return $this->belongsTo(Equipo::class, 'id_equipo', 'id_equipo');

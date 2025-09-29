@@ -37,7 +37,6 @@ class MarcaResource extends Resource
         return $table
             ->columns([
                  Tables\Columns\TextColumn::make('marca')->searchable(),
-                Tables\Columns\TextColumn::make('created_at')->date(),
             ])
             ->filters([])
             ->actions([
@@ -53,8 +52,10 @@ class MarcaResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+
 
             ])
             ->bulkActions([
